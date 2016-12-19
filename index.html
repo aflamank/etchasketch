@@ -1,0 +1,113 @@
+<html>
+<head>
+<style type="text/css">
+#container{
+width: 500px;
+height: 500px;
+margin: auto;
+
+}
+#buttons{
+		width: 500px;
+	text-align: center;	
+	margin: 10px auto;
+}
+
+.sketchDiv{	
+	background-color: white;
+	border: 0.5px dashed grey;
+	float: left;
+}	
+
+.hover{
+	background-color: black;
+}
+.hoverRGB {
+	background-color: rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ');
+
+}
+
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript">
+	
+$("document").ready(function(){
+var rows = 8;
+createDiv(rows);
+hover();
+
+$(".clear").click(function(){
+	clear();
+});
+
+$(".change").click(function(){
+	resize();
+});
+
+$(".rainbow").click(function(){
+	rainbow();
+});
+
+$(".grey").click(function(){
+	grey();
+})
+
+});
+
+function hover(){
+	$("div.sketchDiv").hover(function() {
+	$(this).addClass("hover");	
+	});
+}
+
+function createDiv(rows){
+	var grid = document.getElementById("container");		
+	var gridSize = (780 / (rows + 1));	
+	for(var i = 0; i < rows; i++){
+		var row = document.createElement("div");
+		row.style.width= "760px";
+		row.style.height=gridSize.toString() + "px";
+		row.className = "row";
+		for(var a = 1; a <= rows; a++){
+			var cell = document.createElement("div");
+			cell.className = "sketchDiv";
+			cell.style.width = gridSize.toString() + "px";
+			cell.style.height = gridSize.toString() + "px";
+			row.appendChild(cell);
+		}
+		grid.appendChild(row);
+	}		
+}; 
+
+function clear(){
+$("div.hover").addClass("sketchDiv");
+$("div.hover").removeClass("hover");
+};
+
+function resize(){
+	var x = prompt("How big would you like the square?");
+	var y = parseInt(x);
+	$("#container").empty();
+	createDiv(y);
+	hover();
+};
+
+function rainbow(){	
+	$("button.rainbow").text('Grey').button("refresh");
+	
+};
+
+
+</script>
+</head>
+<body>
+<div id="container">
+</div>
+<div id="buttons">
+<button type="button" class="clear">Clear</button>
+<button type="button" class="change">Change Grid Size</button>
+<button type="button" class="rainbow">Rainbow!</button>
+</div>
+</body>
+</html>
